@@ -9,7 +9,7 @@ class AccessGrant < ApplicationRecord
     where("created_at < ?", 2.days.ago).destroy_all
   end
 
-  def create_token
+  def self.create_token
     self.access_token = SecureRandom.hex(16)
     self.token = SecureRandom.hex(16)
     self.refresh_token = SecureRandom.hex(16)
