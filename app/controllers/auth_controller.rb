@@ -13,7 +13,6 @@ class AuthController < ApplicationController
       client_id: application.id,
       user_id: current_user.id
     )
-
     redirect_to access_grant.generate_redirect_url(params[:redirect_uri], params[:state])
   end
 
@@ -36,7 +35,6 @@ class AuthController < ApplicationController
     render json: {
       provider: 'sso',
       id: current_user.id.to_s,
-      uid: current_user.uid,
       info: {
          email: current_user.email,
       }

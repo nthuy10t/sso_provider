@@ -1,26 +1,58 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="centered login-form">
+  <div class="login-panel panel panel-default">
+    <div class="panel-heading mt-30 font-bold">
+      <h5>Log in</h5>
     </div>
-  <% end -%>
+    <div class="panel-body row">
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <% errors_msg = resource.errors.messages %>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <div class="form-group text-box col-lg-12">
+              <% if show_error_login? %>
+                <div class="row flash_errors_login">
+                  <% flash_notice_login(resource) %>
+                  <ul>
+                    <% flash.each do |type, message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <% if flash[:injection].present? %>
+                <div class="row flash_errors_login">
+                  <ul>
+                    <% flash.each do |type, message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+            <div class="form-group text-box col-lg-12 <%= error_class?(errors_msg[:email]) %>">
+              <label class="pull-left label-cm"><%= t('admin.user.email')%></label>
+              <%= f.text_field :email, autocomplete: "email", class: "form-control display-inline text-box" %>
+            </div>
+            <div class="form-group text-box col-lg-12 <%= error_class?(errors_msg[:password]) %>">
+              <label class="pull-left label-cm"><%= t('admin.user.password')%></label>
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control display-inline text-box' %>
+            </div>
+            <% if devise_mapping.rememberable? -%>
+              <div class="form-group text-box col-lg-12 %>">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end -%>
+            <div class="form-group text-box col-lg-12 %>">
+              <%= f.submit "Log in" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group text-box col-lg-12 %>">
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
+  </div>  
+</div>
