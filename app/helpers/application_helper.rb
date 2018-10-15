@@ -23,6 +23,6 @@ module ApplicationHelper
   end
 
   def get_authentication_url(ai)
-    ai.auth_type == 'SSO' ? ai.login_url : open_tab_clients_path(id: ai.client_id)
+    ai.client_login_url
   end
 end

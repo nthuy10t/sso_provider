@@ -1,0 +1,6 @@
+<h4>New App Information</h4>
+<% @clients.each do |cl| %>
+  <%= link_to new_auth_infor_path(client_id: cl.id) do %>
+    <%= image_tag cl.id.to_s, class: 'image_logo' %> 
+  <% end %>
+<% end %>

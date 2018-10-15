@@ -7,7 +7,6 @@
       </div>
       <div class="col-lg-12">
         <%= f.text_field :client_id, value: @auth_infor.client_id, readonly: true, class: 'form-control'  %>
-        <%= f.hidden_field :id, value: @auth_infor.id  %>
       </div>
     </div>
     <div class="form-group">
@@ -26,22 +25,24 @@
         <%= f.text_field :login_url, value: @auth_infor.client_login_url, readonly: true, class: 'form-control' %>
       </div>
     </div>
-    <div class="form-group">
-       <div>
-        <%= f.label :user_name, 'User Name', class: 'control-label' %>
+    <% if @auth_infor.client_auth_type != 'SSO' %>
+      <div class="form-group">
+        <div>
+          <%= f.label :user_name, 'User Name', class: 'control-label' %>
+        </div>
+        <div class="col-lg-12">
+          <%= f.text_field :user_name, value: @auth_infor.user_name, class: 'form-control' %>
+        </div>
       </div>
-      <div class="col-lg-12">
-        <%= f.text_field :user_name, value: @auth_infor.user_name, class: 'form-control' %>
+      <div class="form-group">
+        <div>
+          <%= f.label :password, 'Password', class: 'control-label' %>
+        </div>
+        <div class="col-lg-12">
+          <%= f.password_field :password, value: @auth_infor.password, class: 'form-control' %>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-       <div>
-        <%= f.label :password, 'Password', class: 'control-label' %>
-      </div>
-      <div class="col-lg-12">
-        <%= f.password_field :password, value: @auth_infor.password, class: 'form-control' %>
-      </div>
-    </div>
+    <% end %>
     <div class="form-group">
       <div class="col-lg-12">
         <%= f.submit 'Save', class: 'form-control' %>
