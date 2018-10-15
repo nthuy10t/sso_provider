@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  root 'home#index'
+  resources :clients do
+    collection do
+      get 'open_tab'
+    end    
+  end
+  resources :auth_infors
   devise_for :users, controllers: {sessions: 'users/sessions'}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   match '/auth/sso/authorize', to: "auth#authorize", via: :all

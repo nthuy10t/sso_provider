@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_070925) do
+ActiveRecord::Schema.define(version: 2018_10_15_085319) do
 
   create_table "access_grants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "client_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2018_10_11_070925) do
     t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "auth_infors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "user_id"
+    t.string "user_name"
+    t.string "password"
+    t.string "login_url"
+    t.string "auth_type"
   end
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

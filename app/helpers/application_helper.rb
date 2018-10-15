@@ -22,4 +22,7 @@ module ApplicationHelper
     'control-label' if error.present?
   end
 
+  def get_authentication_url(ai)
+    ai.auth_type == 'SSO' ? ai.login_url : open_tab_clients_path(id: ai.client_id)
+  end
 end

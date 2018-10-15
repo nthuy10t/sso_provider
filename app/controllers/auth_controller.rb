@@ -10,6 +10,7 @@ class AuthController < ApplicationController
     end
     access_grant = AccessGrant.find_or_create_by(client_id: application.id, user_id: current_user.id)
     access_grant.create_token
+    access_grant.save!
     # access_grant = AccessGrant.find_by(client_id: application.id, user_id: current_user.id)
     # access_grant = AccessGrant.create(client_id: application.id, user_id: current_user.id) if access_grant.nil?
     redirect_to access_grant.generate_redirect_url(params[:redirect_uri], params[:state])
