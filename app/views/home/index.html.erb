@@ -1,2 +1,14 @@
-<%= link_to @clients.first.name_app, 'http://localhost:3000' %>
-<%= link_to 'FB', 'http://facebook.com/login' %>
+<div class="row">
+  <h4><b> Application(Client) </b></h4>
+  <% @auth_infors.each do |ai| %>
+    <%= link_to get_authentication_url(ai), target: "_blank" do %>
+      <%= image_tag ai.client_id.to_s, class: 'image_logo' %> 
+      <%= link_to 'Edit', edit_auth_infor_path(id: ai.id) %>
+    <% end %>
+  <% end %>
+</div>
+<div class="row add_app">
+  <%= link_to new_client_path do %>
+    <%= image_tag 'add_app', class: 'image_logo' %> 
+  <% end %>
+</div>
